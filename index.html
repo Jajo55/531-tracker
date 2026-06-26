@@ -25,7 +25,7 @@ const weekAccents = ["#1A7A3A","#B07800","#C03010","#1A50A0"];
 const round5 = n => Math.round(n / 5) * 5;
 const epley  = (w, r) => Math.round(w * (1 + r / 30));
 const tmFrom = rm => round5(rm * 0.9);
-const buildProgram = t => weeks.map(w => ({...w, sets: w.sets.map(s => ({...s, weight: round5(t * s.pct)}))}));
+const buildProgram = t => weeks.map(function(w) { return Object.assign({}, w, {sets: w.sets.map(function(s) { return Object.assign({}, s, {weight: round5(t * s.pct)}); })}); });
 
 const DEFAULT = {
 lift:“bench”, activeWeek:0, completedSets:{}, repLogs:{},
@@ -34,7 +34,7 @@ nextBenchTM:210, nextSquatTM:365,
 benchNewRM:null, squatNewRM:null,
 };
 
-let state = {…DEFAULT};
+let state = Object.assign({}, DEFAULT);
 let showSettings = false;
 let pinValue = “”;
 let pinError = false;
@@ -43,7 +43,7 @@ function encodeState(s) { return btoa(unescape(encodeURIComponent(JSON.stringify
 function decodeState(str) { return JSON.parse(decodeURIComponent(escape(atob(str)))); }
 function saveToURL() { try { history.replaceState(null,’’,’#’+encodeState(state)); } catch(e) {} }
 function loadFromURL() {
-try { const hash = location.hash.slice(1); if (hash) { state = {…DEFAULT, …decodeState(hash)}; return true; } } catch(e) {}
+try { const hash = location.hash.slice(1); if (hash) { state = Object.assign({}, DEFAULT, decodeState(hash)); return true; } } catch(e) {}
 return false;
 }
 function saveAndNotify() { saveToURL(); showStatus(“● saved ✓”, “#1A7A3A”); }
@@ -59,7 +59,7 @@ flashTimer = setTimeout(() => { const el = document.getElementById(“save-statu
 function currentTM() { return state.lift===“bench” ? state.benchTM : state.squatTM; }
 function prog() { return buildProgram(currentTM()); }
 function isCompleted(wi,si) { return !!state.completedSets[state.lift+”-”+wi+”-”+si]; }
-function getReps(wi,si) { return state.repLogs[state.lift+”-”+wi+”-”+si+”-reps”] ?? “”; }
+function getReps(wi,si) { var v = state.repLogs[state.lift+”-”+wi+”-”+si+”-reps”]; return v !== undefined && v !== null ? v : “”; }
 function weekProgress(wi) {
 const p = prog();
 return { done: p[wi].sets.filter((_,si)=>isCompleted(wi,si)).length, total: p[wi].sets.length };
