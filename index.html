@@ -263,7 +263,11 @@ bannerHTML +
 }
 
 loadFromURL();
+try {
 render();
+} catch(e) {
+document.getElementById(‘app’).innerHTML = ‘<div style="padding:40px 24px;color:#C03010;font-family:Courier New,monospace;"><div style="font-size:14px;font-weight:900;margin-bottom:12px;">ERROR</div><div style="font-size:11px;line-height:1.6;word-break:break-all;">’+e.message+’</div></div>’;
+}
 </script>
 
 </body>
