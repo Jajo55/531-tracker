@@ -131,36 +131,34 @@ var bc=isDone?”#1A7A3A”:”#2A2A2A”;
 var tc=isDone?”#1A7A3A”:”#E8E8E8”;
 var lc=isDone?”#1A7A3A”:”#444”;
 
-```
-html+='<button data-action="toggleset" data-si="'+si+'" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px;text-align:left;background:'+bg+';border:2px solid '+bc+';border-radius:'+br+';margin-bottom:'+(isAmrap&&si===2?"0":"10px")+';font-size:16px;">';
-html+='<div>';
-html+='<div style="font-size:10px;letter-spacing:2px;margin-bottom:4px;color:'+lc+';">SET '+(si+1)+' - '+Math.round(w.pcts[si]*100)+'%</div>';
-html+='<div style="font-size:26px;font-weight:bold;color:'+tc+';">'+wt2+' lbs x '+w.reps[si]+'</div>';
-if(isAmrap) html+='<div style="font-size:10px;margin-top:4px;color:'+(isDone?"#1A7A3A":"#555")+';">AMRAP - leave 1-2 in tank</div>';
-html+='</div>';
-html+='<div style="width:36px;height:36px;border-radius:50%;background:'+(isDone?"#1A7A3A":"#222")+';border:'+(isDone?"none":"2px solid #333")+';flex-shrink:0;"></div>';
-html+='</button>';
+html+=’<button data-action=“toggleset” data-si=”’+si+’” style=“display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px;text-align:left;background:’+bg+’;border:2px solid ‘+bc+’;border-radius:’+br+’;margin-bottom:’+(isAmrap&&si===2?“0”:“10px”)+’;font-size:16px;”>’;
+html+=’<div>’;
+html+=’<div style="font-size:10px;letter-spacing:2px;margin-bottom:4px;color:'+lc+';">SET ‘+(si+1)+’ - ‘+Math.round(w.pcts[si]*100)+’%</div>’;
+html+=’<div style="font-size:26px;font-weight:bold;color:'+tc+';">’+wt2+’ lbs x ‘+w.reps[si]+’</div>’;
+if(isAmrap) html+=’<div style=“font-size:10px;margin-top:4px;color:’+(isDone?”#1A7A3A”:”#555”)+’;”>AMRAP - leave 1-2 in tank</div>’;
+html+=’</div>’;
+html+=’<div style=“width:36px;height:36px;border-radius:50%;background:’+(isDone?”#1A7A3A”:”#222”)+’;border:’+(isDone?“none”:“2px solid #333”)+’;flex-shrink:0;”></div>’;
+html+=’</button>’;
 
 if(isAmrap&&si===2){
-  var rv=reps[rk(si)]||0;
-  var est=rv>=1?epley(wt2,rv):null;
-  html+='<div style="background:#141414;border:2px solid '+(isDone?"#1A7A3A":"#2A2A2A")+';border-top:1px solid #222;border-radius:0 0 4px 4px;padding:14px 16px;margin-bottom:10px;">';
-  html+='<div style="display:flex;align-items:center;justify-content:space-between;">';
-  html+='<span style="font-size:10px;color:#555;letter-spacing:2px;">REPS DONE</span>';
-  html+='<div style="display:flex;align-items:center;gap:10px;">';
-  html+='<button data-action="chreps" data-si="'+si+'" data-delta="-1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">-</button>';
-  html+='<div style="font-size:28px;font-weight:bold;min-width:44px;text-align:center;color:'+(rv>0?(isDone?"#1A7A3A":"#E8E8E8"):"#333")+'">'+(rv>0?rv:"-")+'</div>';
-  html+='<button data-action="chreps" data-si="'+si+'" data-delta="1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">+</button>';
-  html+='</div></div>';
-  if(est){
-    html+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid #222;">';
-    html+='<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:4px;">EST. 1RM</div>';
-    html+='<div style="font-size:24px;font-weight:bold;color:#1A7A3A;">'+est+' lbs</div>';
-    html+='</div>';
-  }
-  html+='</div>';
+var rv=reps[rk(si)]||0;
+var est=rv>=1?epley(wt2,rv):null;
+html+=’<div style=“background:#141414;border:2px solid ‘+(isDone?”#1A7A3A”:”#2A2A2A”)+’;border-top:1px solid #222;border-radius:0 0 4px 4px;padding:14px 16px;margin-bottom:10px;”>’;
+html+=’<div style="display:flex;align-items:center;justify-content:space-between;">’;
+html+=’<span style="font-size:10px;color:#555;letter-spacing:2px;">REPS DONE</span>’;
+html+=’<div style="display:flex;align-items:center;gap:10px;">’;
+html+=’<button data-action="chreps" data-si="'+si+'" data-delta="-1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">-</button>’;
+html+=’<div style=“font-size:28px;font-weight:bold;min-width:44px;text-align:center;color:’+(rv>0?(isDone?”#1A7A3A”:”#E8E8E8”):”#333”)+’”>’+(rv>0?rv:”-”)+’</div>’;
+html+=’<button data-action="chreps" data-si="'+si+'" data-delta="1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">+</button>’;
+html+=’</div></div>’;
+if(est){
+html+=’<div style="margin-top:10px;padding-top:10px;border-top:1px solid #222;">’;
+html+=’<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:4px;">EST. 1RM</div>’;
+html+=’<div style="font-size:24px;font-weight:bold;color:#1A7A3A;">’+est+’ lbs</div>’;
+html+=’</div>’;
 }
-```
+html+=’</div>’;
+}
 
 }
 
