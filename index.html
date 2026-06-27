@@ -25,22 +25,22 @@ var pinVal = "";
 var pinErr = false;
 
 var weeks = [
-{name:“Week 1 - 5s”,    pcts:[0.65,0.75,0.85], reps:[“5”,“5”,“5+”]},
-{name:“Week 2 - 3s”,    pcts:[0.70,0.80,0.90], reps:[“3”,“3”,“3+”]},
-{name:“Week 3 - 5/3/1”, pcts:[0.75,0.85,0.95], reps:[“5”,“3”,“1+”]},
-{name:“Week 4 - Deload”,pcts:[0.40,0.50,0.60], reps:[“5”,“5”,“5”]}
+{name:"Week 1 - 5s",    pcts:[0.65,0.75,0.85], reps:["5","5","5+"]},
+{name:"Week 2 - 3s",    pcts:[0.70,0.80,0.90], reps:["3","3","3+"]},
+{name:"Week 3 - 5/3/1", pcts:[0.75,0.85,0.95], reps:["5","3","1+"]},
+{name:"Week 4 - Deload",pcts:[0.40,0.50,0.60], reps:["5","5","5"]}
 ];
 
 function r5(n){ return Math.round(n/5)*5; }
-function tm(){ return lift===“bench” ? benchTM : squatTM; }
-function sk(s){ return lift+”-”+week+”-”+s; }
-function rk(s){ return lift+”-”+week+”-”+s+”-r”; }
+function tm(){ return lift==="bench" ? benchTM : squatTM; }
+function sk(s){ return lift+"-"+week+"-"+s; }
+function rk(s){ return lift+"-"+week+"-"+s+"-r"; }
 function epley(w,r){ return Math.round(w*(1+r/30)); }
 
 function saveURL(){
 try{
 var enc = btoa(unescape(encodeURIComponent(JSON.stringify({b:benchTM,q:squatTM,l:lift,w:week,d:done,r:reps}))));
-history.replaceState(null,””,”#”+enc);
+history.replaceState(null,"","#"+enc);
 }catch(e){}
 }
 function loadURL(){
@@ -55,160 +55,160 @@ if(s.d) done=s.d; if(s.r) reps=s.r;
 
 function render(){
 var w=weeks[week]; var t=tm();
-var html=’’;
+var html='';
 
 // Header
-html+=’<div style="background:#111;padding:20px 16px;border-bottom:2px solid #333;">’;
-html+=’<div style="font-size:11px;color:#666;letter-spacing:3px;">WENDLER</div>’;
-html+=’<div style="font-size:28px;font-weight:bold;">5 / 3 / 1</div>’;
-html+=’</div>’;
+html+='<div style="background:#111;padding:20px 16px;border-bottom:2px solid #333;">';
+html+='<div style="font-size:11px;color:#666;letter-spacing:3px;">WENDLER</div>';
+html+='<div style="font-size:28px;font-weight:bold;">5 / 3 / 1</div>';
+html+='</div>';
 
 // Save button
-html+=’<div style="background:#1A1A00;border-bottom:2px solid #444400;padding:10px 16px;">’;
-html+=’<button data-action="saveurl" style="width:100%;padding:12px;background:#222;border:1px solid #444;border-radius:4px;color:#E8E8E8;font-size:12px;font-weight:bold;letter-spacing:2px;" id="savebtn">Save Progress URL</button>’;
-html+=’</div>’;
+html+='<div style="background:#1A1A00;border-bottom:2px solid #444400;padding:10px 16px;">';
+html+='<button data-action="saveurl" style="width:100%;padding:12px;background:#222;border:1px solid #444;border-radius:4px;color:#E8E8E8;font-size:12px;font-weight:bold;letter-spacing:2px;" id="savebtn">Save Progress URL</button>';
+html+='</div>';
 
 // Lift toggle
-html+=’<div style="display:flex;">’;
-html+=’<button data-action=“setlift” data-val=“bench” style=“flex:1;padding:16px;border:none;font-size:14px;font-weight:bold;letter-spacing:2px;background:’+(lift===“bench”?”#E8E8E8”:”#1A1A1A”)+’;color:’+(lift===“bench”?”#000”:”#555”)+’;”>BENCH</button>’;
-html+=’<button data-action=“setlift” data-val=“squat” style=“flex:1;padding:16px;border:none;font-size:14px;font-weight:bold;letter-spacing:2px;background:’+(lift===“squat”?”#E8E8E8”:”#1A1A1A”)+’;color:’+(lift===“squat”?”#000”:”#555”)+’;”>SQUAT</button>’;
-html+=’</div>’;
+html+='<div style="display:flex;">';
+html+='<button data-action="setlift" data-val="bench" style="flex:1;padding:16px;border:none;font-size:14px;font-weight:bold;letter-spacing:2px;background:'+(lift==="bench"?"#E8E8E8":"#1A1A1A")+';color:'+(lift==="bench"?"#000":"#555")+';">BENCH</button>';
+html+='<button data-action="setlift" data-val="squat" style="flex:1;padding:16px;border:none;font-size:14px;font-weight:bold;letter-spacing:2px;background:'+(lift==="squat"?"#E8E8E8":"#1A1A1A")+';color:'+(lift==="squat"?"#000":"#555")+';">SQUAT</button>';
+html+='</div>';
 
 // TM row
-html+=’<div style="padding:12px 16px;background:#161616;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;">’;
-html+=’<span style="color:#555;font-size:11px;letter-spacing:2px;">TRAINING MAX <strong style="color:#E8E8E8;font-size:18px;">’+t+’ lbs</strong></span>’;
-html+=’<button data-action=“toggleedit” style=“padding:6px 12px;background:’+(showEdit?”#333”:”#1A1A1A”)+’;border:1px solid ‘+(showEdit?”#666”:”#333”)+’;border-radius:4px;color:#888;font-size:10px;letter-spacing:2px;”>EDIT</button>’;
-html+=’</div>’;
+html+='<div style="padding:12px 16px;background:#161616;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;">';
+html+='<span style="color:#555;font-size:11px;letter-spacing:2px;">TRAINING MAX <strong style="color:#E8E8E8;font-size:18px;">'+t+' lbs</strong></span>';
+html+='<button data-action="toggleedit" style="padding:6px 12px;background:'+(showEdit?"#333":"#1A1A1A")+';border:1px solid '+(showEdit?"#666":"#333")+';border-radius:4px;color:#888;font-size:10px;letter-spacing:2px;">EDIT</button>';
+html+='</div>';
 
 // Edit panel
 if(showEdit){
-var pb=pinErr?”#C03010”:”#333”;
-html+=’<div style="background:#111;border-bottom:2px solid #333;padding:16px;">’;
-html+=’<div style="font-size:10px;color:#666;letter-spacing:3px;margin-bottom:12px;">TRAINING MAXES</div>’;
-html+=’<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">’;
-html+=’<span style="color:#888;font-size:12px;letter-spacing:2px;">BENCH</span>’;
-html+=’<div style="display:flex;align-items:center;gap:10px;">’;
-html+=’<button data-action="adjtm" data-lift="bench" data-delta="-5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">-</button>’;
-html+=’<span style="font-size:22px;font-weight:bold;min-width:55px;text-align:center;">’+benchTM+’</span>’;
-html+=’<button data-action="adjtm" data-lift="bench" data-delta="5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">+</button>’;
-html+=’</div></div>’;
-html+=’<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">’;
-html+=’<span style="color:#888;font-size:12px;letter-spacing:2px;">SQUAT</span>’;
-html+=’<div style="display:flex;align-items:center;gap:10px;">’;
-html+=’<button data-action="adjtm" data-lift="squat" data-delta="-5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">-</button>’;
-html+=’<span style="font-size:22px;font-weight:bold;min-width:55px;text-align:center;">’+squatTM+’</span>’;
-html+=’<button data-action="adjtm" data-lift="squat" data-delta="5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">+</button>’;
-html+=’</div></div>’;
-html+=’<div style="border-top:1px solid #222;padding-top:14px;">’;
-html+=’<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:8px;">PIN TO START NEW CYCLE</div>’;
-html+=’<input id="pininput" type="password" inputmode="numeric" maxlength="6" placeholder="----" style="width:100%;padding:12px;background:#1A1A1A;border:1px solid '+pb+';border-radius:4px;color:#E8E8E8;font-size:20px;letter-spacing:6px;text-align:center;" />’;
-if(pinErr) html+=’<div style="color:#C03010;font-size:10px;text-align:center;margin-top:6px;">Incorrect PIN</div>’;
-html+=’<button data-action="startcycle" style="width:100%;margin-top:10px;padding:14px;background:#0A2A0A;border:1px solid #1A5A1A;border-radius:4px;color:#1A7A3A;font-size:11px;font-weight:bold;letter-spacing:3px;">START NEW CYCLE</button>’;
-html+=’<div style="font-size:9px;color:#444;text-align:center;margin-top:8px;">Clears all sets and rep logs</div>’;
-html+=’</div></div>’;
+var pb=pinErr?"#C03010":"#333";
+html+='<div style="background:#111;border-bottom:2px solid #333;padding:16px;">';
+html+='<div style="font-size:10px;color:#666;letter-spacing:3px;margin-bottom:12px;">TRAINING MAXES</div>';
+html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+html+='<span style="color:#888;font-size:12px;letter-spacing:2px;">BENCH</span>';
+html+='<div style="display:flex;align-items:center;gap:10px;">';
+html+='<button data-action="adjtm" data-lift="bench" data-delta="-5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">-</button>';
+html+='<span style="font-size:22px;font-weight:bold;min-width:55px;text-align:center;">'+benchTM+'</span>';
+html+='<button data-action="adjtm" data-lift="bench" data-delta="5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">+</button>';
+html+='</div></div>';
+html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">';
+html+='<span style="color:#888;font-size:12px;letter-spacing:2px;">SQUAT</span>';
+html+='<div style="display:flex;align-items:center;gap:10px;">';
+html+='<button data-action="adjtm" data-lift="squat" data-delta="-5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">-</button>';
+html+='<span style="font-size:22px;font-weight:bold;min-width:55px;text-align:center;">'+squatTM+'</span>';
+html+='<button data-action="adjtm" data-lift="squat" data-delta="5" style="width:44px;height:44px;border-radius:50%;background:#1A1A1A;border:1px solid #333;color:#888;font-size:22px;">+</button>';
+html+='</div></div>';
+html+='<div style="border-top:1px solid #222;padding-top:14px;">';
+html+='<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:8px;">PIN TO START NEW CYCLE</div>';
+html+='<input id="pininput" type="password" inputmode="numeric" maxlength="6" placeholder="----" style="width:100%;padding:12px;background:#1A1A1A;border:1px solid '+pb+';border-radius:4px;color:#E8E8E8;font-size:20px;letter-spacing:6px;text-align:center;" />';
+if(pinErr) html+='<div style="color:#C03010;font-size:10px;text-align:center;margin-top:6px;">Incorrect PIN</div>';
+html+='<button data-action="startcycle" style="width:100%;margin-top:10px;padding:14px;background:#0A2A0A;border:1px solid #1A5A1A;border-radius:4px;color:#1A7A3A;font-size:11px;font-weight:bold;letter-spacing:3px;">START NEW CYCLE</button>';
+html+='<div style="font-size:9px;color:#444;text-align:center;margin-top:8px;">Clears all sets and rep logs</div>';
+html+='</div></div>';
 }
 
 // Week tabs
-html+=’<div style="display:flex;border-bottom:1px solid #222;">’;
+html+='<div style="display:flex;border-bottom:1px solid #222;">';
 for(var i=0;i<4;i++){
-var wd=0; for(var s=0;s<3;s++){if(done[lift+”-”+i+”-”+s])wd++;}
+var wd=0; for(var s=0;s<3;s++){if(done[lift+"-"+i+"-"+s])wd++;}
 var ia=week===i;
-html+=’<button data-action=“setweek” data-val=”’+i+’” style=“flex:1;padding:10px 4px;border:none;font-size:11px;font-weight:bold;background:’+(ia?”#C8F0D4”:“transparent”)+’;color:’+(ia?”#1A7A3A”:”#555”)+’;border-bottom:’+(ia?“3px solid #1A7A3A”:“3px solid transparent”)+’;”>W’+(i+1)+’<br><span style="font-size:9px;">’+wd+’/3</span></button>’;
+html+='<button data-action="setweek" data-val="'+i+'" style="flex:1;padding:10px 4px;border:none;font-size:11px;font-weight:bold;background:'+(ia?"#C8F0D4":"transparent")+';color:'+(ia?"#1A7A3A":"#555")+';border-bottom:'+(ia?"3px solid #1A7A3A":"3px solid transparent")+';">W'+(i+1)+'<br><span style="font-size:9px;">'+wd+'/3</span></button>';
 }
-html+=’</div>’;
+html+='</div>';
 
 // Sets
-html+=’<div style="padding:16px;">’;
-html+=’<div style="font-size:11px;color:#1A7A3A;letter-spacing:2px;margin-bottom:12px;">’+w.name.toUpperCase()+’</div>’;
+html+='<div style="padding:16px;">';
+html+='<div style="font-size:11px;color:#1A7A3A;letter-spacing:2px;margin-bottom:12px;">'+w.name.toUpperCase()+'</div>';
 
 for(var si=0;si<3;si++){
 var wt2=r5(t*w.pcts[si]);
 var isDone=!!done[sk(si)];
-var isAmrap=w.reps[si].indexOf(”+”)>=0;
-var br=(isAmrap&&si===2)?“4px 4px 0 0”:“4px”;
-var bg=isDone?”#C8F0D4”:”#1A1A1A”;
-var bc=isDone?”#1A7A3A”:”#2A2A2A”;
-var tc=isDone?”#1A7A3A”:”#E8E8E8”;
-var lc=isDone?”#1A7A3A”:”#444”;
+var isAmrap=w.reps[si].indexOf("+")>=0;
+var br=(isAmrap&&si===2)?"4px 4px 0 0":"4px";
+var bg=isDone?"#C8F0D4":"#1A1A1A";
+var bc=isDone?"#1A7A3A":"#2A2A2A";
+var tc=isDone?"#1A7A3A":"#E8E8E8";
+var lc=isDone?"#1A7A3A":"#444";
 
-html+=’<button data-action=“toggleset” data-si=”’+si+’” style=“display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px;text-align:left;background:’+bg+’;border:2px solid ‘+bc+’;border-radius:’+br+’;margin-bottom:’+(isAmrap&&si===2?“0”:“10px”)+’;font-size:16px;”>’;
-html+=’<div>’;
-html+=’<div style="font-size:10px;letter-spacing:2px;margin-bottom:4px;color:'+lc+';">SET ‘+(si+1)+’ - ‘+Math.round(w.pcts[si]*100)+’%</div>’;
-html+=’<div style="font-size:26px;font-weight:bold;color:'+tc+';">’+wt2+’ lbs x ‘+w.reps[si]+’</div>’;
-if(isAmrap) html+=’<div style=“font-size:10px;margin-top:4px;color:’+(isDone?”#1A7A3A”:”#555”)+’;”>AMRAP - leave 1-2 in tank</div>’;
-html+=’</div>’;
-html+=’<div style=“width:36px;height:36px;border-radius:50%;background:’+(isDone?”#1A7A3A”:”#222”)+’;border:’+(isDone?“none”:“2px solid #333”)+’;flex-shrink:0;”></div>’;
-html+=’</button>’;
+html+='<button data-action="toggleset" data-si="'+si+'" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px;text-align:left;background:'+bg+';border:2px solid '+bc+';border-radius:'+br+';margin-bottom:'+(isAmrap&&si===2?"0":"10px")+';font-size:16px;">';
+html+='<div>';
+html+='<div style="font-size:10px;letter-spacing:2px;margin-bottom:4px;color:'+lc+';">SET '+(si+1)+' - '+Math.round(w.pcts[si]*100)+'%</div>';
+html+='<div style="font-size:26px;font-weight:bold;color:'+tc+';">'+wt2+' lbs x '+w.reps[si]+'</div>';
+if(isAmrap) html+='<div style="font-size:10px;margin-top:4px;color:'+(isDone?"#1A7A3A":"#555")+';">AMRAP - leave 1-2 in tank</div>';
+html+='</div>';
+html+='<div style="width:36px;height:36px;border-radius:50%;background:'+(isDone?"#1A7A3A":"#222")+';border:'+(isDone?"none":"2px solid #333")+';flex-shrink:0;"></div>';
+html+='</button>';
 
 if(isAmrap&&si===2){
-var rv=reps[rk(si)]||0;
-var est=rv>=1?epley(wt2,rv):null;
-html+=’<div style=“background:#141414;border:2px solid ‘+(isDone?”#1A7A3A”:”#2A2A2A”)+’;border-top:1px solid #222;border-radius:0 0 4px 4px;padding:14px 16px;margin-bottom:10px;”>’;
-html+=’<div style="display:flex;align-items:center;justify-content:space-between;">’;
-html+=’<span style="font-size:10px;color:#555;letter-spacing:2px;">REPS DONE</span>’;
-html+=’<div style="display:flex;align-items:center;gap:10px;">’;
-html+=’<button data-action="chreps" data-si="'+si+'" data-delta="-1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">-</button>’;
-html+=’<div style=“font-size:28px;font-weight:bold;min-width:44px;text-align:center;color:’+(rv>0?(isDone?”#1A7A3A”:”#E8E8E8”):”#333”)+’”>’+(rv>0?rv:”-”)+’</div>’;
-html+=’<button data-action="chreps" data-si="'+si+'" data-delta="1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">+</button>’;
-html+=’</div></div>’;
-if(est){
-html+=’<div style="margin-top:10px;padding-top:10px;border-top:1px solid #222;">’;
-html+=’<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:4px;">EST. 1RM</div>’;
-html+=’<div style="font-size:24px;font-weight:bold;color:#1A7A3A;">’+est+’ lbs</div>’;
-html+=’</div>’;
-}
-html+=’</div>’;
+  var rv=reps[rk(si)]||0;
+  var est=rv>=1?epley(wt2,rv):null;
+  html+='<div style="background:#141414;border:2px solid '+(isDone?"#1A7A3A":"#2A2A2A")+';border-top:1px solid #222;border-radius:0 0 4px 4px;padding:14px 16px;margin-bottom:10px;">';
+  html+='<div style="display:flex;align-items:center;justify-content:space-between;">';
+  html+='<span style="font-size:10px;color:#555;letter-spacing:2px;">REPS DONE</span>';
+  html+='<div style="display:flex;align-items:center;gap:10px;">';
+  html+='<button data-action="chreps" data-si="'+si+'" data-delta="-1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">-</button>';
+  html+='<div style="font-size:28px;font-weight:bold;min-width:44px;text-align:center;color:'+(rv>0?(isDone?"#1A7A3A":"#E8E8E8"):"#333")+'">'+(rv>0?rv:"-")+'</div>';
+  html+='<button data-action="chreps" data-si="'+si+'" data-delta="1" style="width:44px;height:44px;border-radius:50%;background:#222;border:1px solid #333;color:#888;font-size:22px;">+</button>';
+  html+='</div></div>';
+  if(est){
+    html+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid #222;">';
+    html+='<div style="font-size:10px;color:#555;letter-spacing:2px;margin-bottom:4px;">EST. 1RM</div>';
+    html+='<div style="font-size:24px;font-weight:bold;color:#1A7A3A;">'+est+' lbs</div>';
+    html+='</div>';
+  }
+  html+='</div>';
 }
 
 }
 
 var allDone=done[sk(0)]&&done[sk(1)]&&done[sk(2)];
 if(allDone){
-html+=’<div style="margin-top:12px;background:#C8F0D4;border:2px solid #1A7A3A;border-radius:4px;padding:16px;text-align:center;font-size:12px;font-weight:bold;letter-spacing:3px;color:#1A7A3A;">WEEK COMPLETE</div>’;
+html+='<div style="margin-top:12px;background:#C8F0D4;border:2px solid #1A7A3A;border-radius:4px;padding:16px;text-align:center;font-size:12px;font-weight:bold;letter-spacing:3px;color:#1A7A3A;">WEEK COMPLETE</div>';
 }
 
-html+=’</div>’;
-document.getElementById(“app”).innerHTML=html;
+html+='</div>';
+document.getElementById("app").innerHTML=html;
 
 // PIN input listener
-var pi=document.getElementById(“pininput”);
-if(pi){ pi.addEventListener(“input”,function(){ pinVal=this.value; pinErr=false; }); }
+var pi=document.getElementById("pininput");
+if(pi){ pi.addEventListener("input",function(){ pinVal=this.value; pinErr=false; }); }
 
 saveURL();
 }
 
 // Single event delegation listener
-document.getElementById(“app”).addEventListener(“click”, function(e){
+document.getElementById("app").addEventListener("click", function(e){
 var el=e.target;
 while(el && el!==this){
-var action=el.getAttribute(“data-action”);
+var action=el.getAttribute("data-action");
 if(action) break;
 el=el.parentNode;
 }
 if(!el||!el.getAttribute) return;
-var action=el.getAttribute(“data-action”);
+var action=el.getAttribute("data-action");
 if(!action) return;
 
-if(action===“setlift”){ lift=el.getAttribute(“data-val”); render(); }
-else if(action===“setweek”){ week=parseInt(el.getAttribute(“data-val”)); render(); }
-else if(action===“toggleset”){ var si=parseInt(el.getAttribute(“data-si”)); done[sk(si)]=!done[sk(si)]; render(); }
-else if(action===“chreps”){ var si2=parseInt(el.getAttribute(“data-si”)); var d=parseInt(el.getAttribute(“data-delta”)); reps[rk(si2)]=Math.max(0,(reps[rk(si2)]||0)+d); render(); }
-else if(action===“toggleedit”){ showEdit=!showEdit; pinVal=””; pinErr=false; render(); }
-else if(action===“adjtm”){ var l=el.getAttribute(“data-lift”); var d2=parseInt(el.getAttribute(“data-delta”)); if(l===“bench”) benchTM=Math.max(45,benchTM+d2); else squatTM=Math.max(45,squatTM+d2); render(); }
-else if(action===“startcycle”){
-if(pinVal!==“1521”){ pinErr=true; render(); return; }
-done={}; reps={}; week=0; showEdit=false; pinVal=””; pinErr=false; render();
+if(action==="setlift"){ lift=el.getAttribute("data-val"); render(); }
+else if(action==="setweek"){ week=parseInt(el.getAttribute("data-val")); render(); }
+else if(action==="toggleset"){ var si=parseInt(el.getAttribute("data-si")); done[sk(si)]=!done[sk(si)]; render(); }
+else if(action==="chreps"){ var si2=parseInt(el.getAttribute("data-si")); var d=parseInt(el.getAttribute("data-delta")); reps[rk(si2)]=Math.max(0,(reps[rk(si2)]||0)+d); render(); }
+else if(action==="toggleedit"){ showEdit=!showEdit; pinVal=""; pinErr=false; render(); }
+else if(action==="adjtm"){ var l=el.getAttribute("data-lift"); var d2=parseInt(el.getAttribute("data-delta")); if(l==="bench") benchTM=Math.max(45,benchTM+d2); else squatTM=Math.max(45,squatTM+d2); render(); }
+else if(action==="startcycle"){
+if(pinVal!=="1521"){ pinErr=true; render(); return; }
+done={}; reps={}; week=0; showEdit=false; pinVal=""; pinErr=false; render();
 }
-else if(action===“saveurl”){
+else if(action==="saveurl"){
 saveURL();
 var url=location.href;
-var btn=document.getElementById(“savebtn”);
+var btn=document.getElementById("savebtn");
 if(navigator.clipboard){
 navigator.clipboard.writeText(url).then(function(){
-if(btn){ btn.textContent=“Copied! Bookmark this URL”; btn.style.background=”#1A7A3A”; }
-setTimeout(function(){ if(btn){ btn.textContent=“Save Progress URL”; btn.style.background=”#222”; } },3000);
+if(btn){ btn.textContent="Copied! Bookmark this URL"; btn.style.background="#1A7A3A"; }
+setTimeout(function(){ if(btn){ btn.textContent="Save Progress URL"; btn.style.background="#222"; } },3000);
 });
-} else { prompt(“Copy this URL:”,url); }
+} else { prompt("Copy this URL:",url); }
 }
 });
 
